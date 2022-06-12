@@ -1,0 +1,27 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "deploy.labels" . | nindent 4 }}
+  name: {{ .Values.deploy.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+    {{- include "deploySpec.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "deploySpec.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.deploy.name }}
+        env:
+        - name: MONGO_URL
+          value: mongodb://mongo:27017/docker-node-mongo
+        resources: {}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: 3000
+      restartPolicy: Always

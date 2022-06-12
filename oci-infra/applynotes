@@ -1,0 +1,260 @@
+naveenn@VM1:~/oci-infra$ terraform apply
+data.oci_identity_availability_domains.ads: Reading...
+module.vcn.oci_core_vcn.vcn: Refreshing state... [id=ocid1.vcn.oc1.ap-hyderabad-1.amaaaaaaceme42aanrycktzzf2oihcymhb3upfcfnyvifgobkiggvjyn6nxq]
+module.vcn.data.oci_core_services.all_oci_services[0]: Reading...
+data.oci_identity_availability_domains.ads: Read complete after 2s [id=IdentityAvailabilityDomainsDataSource-2117726703]
+module.vcn.data.oci_core_services.all_oci_services[0]: Read complete after 2s [id=CoreServicesDataSource-0]
+module.vcn.oci_core_default_security_list.lockdown[0]: Refreshing state... [id=ocid1.securitylist.oc1.ap-hyderabad-1.aaaaaaaaniec5axafp6ce4p5rjtj2hjwxcsdvx7rlk42mra663p5hv32joaa]
+module.vcn.oci_core_nat_gateway.nat_gateway[0]: Refreshing state... [id=ocid1.natgateway.oc1.ap-hyderabad-1.aaaaaaaasyic2iw3bcf57qmihzecniidxmrsixjcephdpfxpyzw2mfnluzga]
+module.vcn.oci_core_service_gateway.service_gateway[0]: Refreshing state... [id=ocid1.servicegateway.oc1.ap-hyderabad-1.aaaaaaaarli2tuwakuykudly33hlyqkx2khhw4it3ffnkg7bhuca3t6gx4nq]
+module.vcn.oci_core_internet_gateway.ig[0]: Refreshing state... [id=ocid1.internetgateway.oc1.ap-hyderabad-1.aaaaaaaayzxbuosi2fi56rw7ut5ny2m3te65xr4s5baj63vqi6o5vzrnzyba]
+module.vcn.oci_core_route_table.nat[0]: Refreshing state... [id=ocid1.routetable.oc1.ap-hyderabad-1.aaaaaaaakfxbvxaghl3vph2pnnmmjv7smu6ijn3uvuw4gpsl7drg3ofgv3hq]
+module.vcn.oci_core_route_table.ig[0]: Refreshing state... [id=ocid1.routetable.oc1.ap-hyderabad-1.aaaaaaaagpvriljy3nni6vgejibtfabbgbmkp7j4pfiuzfwr4rpgkfzdwywq]
+
+Terraform used the selected providers to generate the following execution plan. Resource actions are indicated with the following
+symbols:
+  + create
+
+Terraform will perform the following actions:
+
+  # oci_containerengine_cluster.k8s_cluster will be created
+  + resource "oci_containerengine_cluster" "k8s_cluster" {
+      + available_kubernetes_upgrades = (known after apply)
+      + compartment_id                = "ocid1.tenancy.oc1..aaaaaaaabak4omwfupuzv2h6e7lp3huwilqxketqdiewaacxbi2xpaiocxna"
+      + defined_tags                  = (known after apply)
+      + endpoints                     = (known after apply)
+      + freeform_tags                 = (known after apply)
+      + id                            = (known after apply)
+      + kms_key_id                    = (known after apply)
+      + kubernetes_version            = "v1.21.5"
+      + lifecycle_details             = (known after apply)
+      + metadata                      = (known after apply)
+      + name                          = "free-k8s-cluster"
+      + state                         = (known after apply)
+      + vcn_id                        = "ocid1.vcn.oc1.ap-hyderabad-1.amaaaaaaceme42aanrycktzzf2oihcymhb3upfcfnyvifgobkiggvjyn6nxq"
+
+      + endpoint_config {
+          + is_public_ip_enabled = true
+          + subnet_id            = (known after apply)
+        }
+
+      + image_policy_config {
+          + is_policy_enabled = (known after apply)
+
+          + key_details {
+              + kms_key_id = (known after apply)
+            }
+        }
+
+      + options {
+          + service_lb_subnet_ids = (known after apply)
+
+          + add_ons {
+              + is_kubernetes_dashboard_enabled = false
+              + is_tiller_enabled               = false
+            }
+
+          + admission_controller_options {
+              + is_pod_security_policy_enabled = (known after apply)
+            }
+
+          + kubernetes_network_config {
+              + pods_cidr     = "10.244.0.0/16"
+              + services_cidr = "10.96.0.0/16"
+            }
+
+          + persistent_volume_config {
+              + defined_tags  = (known after apply)
+              + freeform_tags = (known after apply)
+            }
+
+          + service_lb_config {
+              + defined_tags  = (known after apply)
+              + freeform_tags = (known after apply)
+            }
+        }
+    }
+
+  # oci_containerengine_node_pool.k8s_node_pool will be created
+  + resource "oci_containerengine_node_pool" "k8s_node_pool" {
+      + cluster_id          = (known after apply)
+      + compartment_id      = "ocid1.tenancy.oc1..aaaaaaaabak4omwfupuzv2h6e7lp3huwilqxketqdiewaacxbi2xpaiocxna"
+      + defined_tags        = (known after apply)
+      + freeform_tags       = (known after apply)
+      + id                  = (known after apply)
+      + kubernetes_version  = "v1.21.5"
+      + name                = "free-k8s-node-pool"
+      + node_image_id       = (known after apply)
+      + node_image_name     = (known after apply)
+      + node_metadata       = (known after apply)
+      + node_shape          = "VM.Standard.A1.Flex"
+      + node_source         = (known after apply)
+      + nodes               = (known after apply)
+      + quantity_per_subnet = (known after apply)
+      + ssh_public_key      = "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABgQDehtyUC9hlkT9XGHZsiPLrFUMgpGmch3snmeE85LCId8T9S1BCzBhvn4tee48J5tacvK7xhBB40/LhS5GBspWydrGzW25KrtGYmDJj1FI6qB0QaUisY1dNeNtv1awoEmUVnXi1L18ygWCbsaV02Fu2iNZfG2cwa+0N4SgEMqVf5sLxEu3fbKOBhwhFIOWh0MkLrqtepCmd0CoSX83SP4TTLENFE4SOzSfdtfOvmgla1qbvxLBjroLCC0HuTFc7Jpk2I0Ut3luremXf2RtUiCC68v6fCzS+3BadfDpyUwuJ88qfDG2IL/N8nNObuxC/bgMGuNkTWIbwM781ze60ZZcGA+DHmewDA5O84ca4Ip8M9wY29jvruWjvOI5QV/Nt+7NhFhlTCdcMycmeJKC0Z1+S1kIhY3nXhSuYYCsLDeKvgjtg5fvvFD0X8gGSXhWnNAy2YW+A4oOOdfBf3HopNTHtlqxnwomThX37VI8NSA8NzSV63tDT0hXsqu4zAuaIqMs= naveenn@VM1"
+      + subnet_ids          = (known after apply)
+
+      + initial_node_labels {
+          + key   = "name"
+          + value = "free-k8s-cluster"
+        }
+
+      + node_config_details {
+          + defined_tags                        = (known after apply)
+          + freeform_tags                       = (known after apply)
+          + is_pv_encryption_in_transit_enabled = (known after apply)
+          + kms_key_id                          = (known after apply)
+          + nsg_ids                             = (known after apply)
+          + size                                = 2
+
+          + placement_configs {
+              + availability_domain     = "OLfp:AP-HYDERABAD-1-AD-1"
+              + capacity_reservation_id = (known after apply)
+              + fault_domains           = (known after apply)
+              + subnet_id               = (known after apply)
+            }
+        }
+
+      + node_shape_config {
+          + memory_in_gbs = 6
+          + ocpus         = 1
+        }
+
+      + node_source_details {
+          + boot_volume_size_in_gbs = (known after apply)
+          + image_id                = "ocid1.image.oc1.eu-frankfurt-1.aaaaaaaabh7a24rl4qxunwziscawa4k65ar7ktdbbt4yf74hvcp7zipharhq"
+          + source_type             = "image"
+        }
+    }
+
+  # oci_core_security_list.private_subnet_sl will be created
+  + resource "oci_core_security_list" "private_subnet_sl" {
+      + compartment_id = "ocid1.tenancy.oc1..aaaaaaaabak4omwfupuzv2h6e7lp3huwilqxketqdiewaacxbi2xpaiocxna"
+      + defined_tags   = (known after apply)
+      + display_name   = "free-k8s-private-subnet-sl"
+      + freeform_tags  = (known after apply)
+      + id             = (known after apply)
+      + state          = (known after apply)
+      + time_created   = (known after apply)
+      + vcn_id         = "ocid1.vcn.oc1.ap-hyderabad-1.amaaaaaaceme42aanrycktzzf2oihcymhb3upfcfnyvifgobkiggvjyn6nxq"
+
+      + egress_security_rules {
+          + description      = (known after apply)
+          + destination      = "0.0.0.0/0"
+          + destination_type = "CIDR_BLOCK"
+          + protocol         = "all"
+          + stateless        = false
+        }
+
+      + ingress_security_rules {
+          + description = (known after apply)
+          + protocol    = "all"
+          + source      = "10.0.0.0/16"
+          + source_type = "CIDR_BLOCK"
+          + stateless   = false
+        }
+    }
+
+  # oci_core_security_list.public_subnet_sl will be created
+  + resource "oci_core_security_list" "public_subnet_sl" {
+      + compartment_id = "ocid1.tenancy.oc1..aaaaaaaabak4omwfupuzv2h6e7lp3huwilqxketqdiewaacxbi2xpaiocxna"
+      + defined_tags   = (known after apply)
+      + display_name   = "free-k8s-public-subnet-sl"
+      + freeform_tags  = (known after apply)
+      + id             = (known after apply)
+      + state          = (known after apply)
+      + time_created   = (known after apply)
+      + vcn_id         = "ocid1.vcn.oc1.ap-hyderabad-1.amaaaaaaceme42aanrycktzzf2oihcymhb3upfcfnyvifgobkiggvjyn6nxq"
+
+      + egress_security_rules {
+          + description      = (known after apply)
+          + destination      = "0.0.0.0/0"
+          + destination_type = "CIDR_BLOCK"
+          + protocol         = "all"
+          + stateless        = false
+        }
+
+      + ingress_security_rules {
+          + description = (known after apply)
+          + protocol    = "6"
+          + source      = "0.0.0.0/0"
+          + source_type = "CIDR_BLOCK"
+          + stateless   = false
+
+          + tcp_options {
+              + max = 6443
+              + min = 6443
+            }
+        }
+      + ingress_security_rules {
+          + description = (known after apply)
+          + protocol    = "all"
+          + source      = "10.0.0.0/16"
+          + source_type = "CIDR_BLOCK"
+          + stateless   = false
+        }
+    }
+
+  # oci_core_subnet.vcn_private_subnet will be created
+  + resource "oci_core_subnet" "vcn_private_subnet" {
+      + availability_domain        = (known after apply)
+      + cidr_block                 = "10.0.1.0/24"
+      + compartment_id             = "ocid1.tenancy.oc1..aaaaaaaabak4omwfupuzv2h6e7lp3huwilqxketqdiewaacxbi2xpaiocxna"
+      + defined_tags               = (known after apply)
+      + dhcp_options_id            = (known after apply)
+      + display_name               = "free-k8s-private-subnet"
+      + dns_label                  = (known after apply)
+      + freeform_tags              = (known after apply)
+      + id                         = (known after apply)
+      + ipv6cidr_block             = (known after apply)
+      + ipv6cidr_blocks            = (known after apply)
+      + ipv6virtual_router_ip      = (known after apply)
+      + prohibit_internet_ingress  = (known after apply)
+      + prohibit_public_ip_on_vnic = true
+      + route_table_id             = "ocid1.routetable.oc1.ap-hyderabad-1.aaaaaaaakfxbvxaghl3vph2pnnmmjv7smu6ijn3uvuw4gpsl7drg3ofgv3hq"
+      + security_list_ids          = (known after apply)
+      + state                      = (known after apply)
+      + subnet_domain_name         = (known after apply)
+      + time_created               = (known after apply)
+      + vcn_id                     = "ocid1.vcn.oc1.ap-hyderabad-1.amaaaaaaceme42aanrycktzzf2oihcymhb3upfcfnyvifgobkiggvjyn6nxq"
+      + virtual_router_ip          = (known after apply)
+      + virtual_router_mac         = (known after apply)
+    }
+
+  # oci_core_subnet.vcn_public_subnet will be created
+  + resource "oci_core_subnet" "vcn_public_subnet" {
+      + availability_domain        = (known after apply)
+      + cidr_block                 = "10.0.0.0/24"
+      + compartment_id             = "ocid1.tenancy.oc1..aaaaaaaabak4omwfupuzv2h6e7lp3huwilqxketqdiewaacxbi2xpaiocxna"
+      + defined_tags               = (known after apply)
+      + dhcp_options_id            = (known after apply)
+      + display_name               = "free-k8s-public-subnet"
+      + dns_label                  = (known after apply)
+      + freeform_tags              = (known after apply)
+      + id                         = (known after apply)
+      + ipv6cidr_block             = (known after apply)
+      + ipv6cidr_blocks            = (known after apply)
+      + ipv6virtual_router_ip      = (known after apply)
+      + prohibit_internet_ingress  = (known after apply)
+      + prohibit_public_ip_on_vnic = (known after apply)
+      + route_table_id             = "ocid1.routetable.oc1.ap-hyderabad-1.aaaaaaaagpvriljy3nni6vgejibtfabbgbmkp7j4pfiuzfwr4rpgkfzdwywq"
+      + security_list_ids          = (known after apply)
+      + state                      = (known after apply)
+      + subnet_domain_name         = (known after apply)
+      + time_created               = (known after apply)
+      + vcn_id                     = "ocid1.vcn.oc1.ap-hyderabad-1.amaaaaaaceme42aanrycktzzf2oihcymhb3upfcfnyvifgobkiggvjyn6nxq"
+      + virtual_router_ip          = (known after apply)
+      + virtual_router_mac         = (known after apply)
+    }
+
+Plan: 6 to add, 0 to change, 0 to destroy.
+
+Changes to Outputs:
+  + k8s-cluster-id = (known after apply)
+
+Do you want to perform these actions?
+  Terraform will perform the actions described above.
+  Only 'yes' will be accepted to approve.
+
+  Enter a value:
+

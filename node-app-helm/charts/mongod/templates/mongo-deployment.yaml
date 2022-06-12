@@ -1,0 +1,30 @@
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    {{- include "mongoDeploy.labels" . | nindent 4 }}
+  name: {{ .Values.deploySpec.name }}
+spec:
+  replicas: {{ .Values.replicaCount }}
+  selector:
+    matchLabels:
+      {{- include "mongoDeploySpec.labels" . | nindent 6 }}
+  template:
+    metadata:
+      labels:
+        {{- include "mongoDeploySpec.labels" . | nindent 8 }}
+    spec:
+      containers:
+      - name: {{ .Values.deploySpec.containerName }}
+        volumeMounts:
+          - mountPath: {{ .Values.pv.path }}
+            name: {{ .Values.deploySpec.volumeName }}
+        image: "{{ .Values.image.repository }}:{{ .Values.image.tag }}"
+        ports:
+        - containerPort: {{ .Values.deploySpec.containerPort }}
+      volumes:
+      - name: {{ .Values.deploySpec.volumeName }}
+        persistentVolumeClaim:
+          claimName: {{ .Values.pvc.name }}
+      restartPolicy: Always

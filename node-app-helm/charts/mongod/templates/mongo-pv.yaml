@@ -1,0 +1,15 @@
+---
+kind: PersistentVolume
+apiVersion: v1
+metadata:
+  name: {{ .Values.pv.name }}
+  labels:
+    {{- include "mongoPV.labels" . | nindent 4 }}
+spec:
+  storageClassName: {{ .Values.pv.sc }}
+  capacity:
+    storage: {{ .Values.pv.volume }}
+  accessModes:
+    - {{ .Values.pv.access }}
+  hostPath:
+    path: {{ .Values.pv.path }}
