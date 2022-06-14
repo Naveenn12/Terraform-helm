@@ -40,11 +40,11 @@ Respectively, create an oci-infra folder. In that, let’s have a variables.tf f
  
   For Variable.tf file, we need to export the 3 variables
   
-$ export TF_VAR_compartment_id=<your compartment ocid>
+$ export TF_VAR_compartment_id= "your compartment ocid"
  
-$ export TF_VAR_region=<your region>
+$ export TF_VAR_region= "your region"
  
-$ export TF_VAR_ssh_public_key=<your public key>
+$ export TF_VAR_ssh_public_key= "your public key"
  
   
 **Network Resources For The Free Kubernetes Cluster**
