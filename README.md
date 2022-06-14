@@ -41,8 +41,11 @@ Respectively, create an oci-infra folder. In that, let’s have a variables.tf f
   For Variable.tf file, we need to export the 3 variables
   
 $ export TF_VAR_compartment_id=<your compartment ocid>
+ 
 $ export TF_VAR_region=<your region>
+ 
 $ export TF_VAR_ssh_public_key=<your public key>
+ 
   
 **Network Resources For The Free Kubernetes Cluster**
  
@@ -77,7 +80,7 @@ Let’s set this configuration through the KUBECONFIG environment variable for k
 $ export KUBECONFIG=~/.kube/free-k8s-config
 And then let’s try to list the available nodes in the cluster.
 
-$ kubectl get nodes
+**$ kubectl get nodes**
   
 And if you see the 2 nodes that the node pool has provisioned, you’re done. The cluster is ready.
   
