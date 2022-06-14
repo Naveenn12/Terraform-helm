@@ -25,8 +25,8 @@ Note: for some reason I wasn’t able to get Terraform work with a passphrase pr
 After you’re done with the key generation, there’s one more thing we need to do. Associating the public key that was generated during setup with the user. Go back to your user in the Oracle Cloud web console, click on API keys on the left and click on Add API Key. Upload your public key’s pem file and you’re done.
 
 You can verify that everything is configured properly by running the following command:
-
-$ oci iam compartment list -c <tenancy-ocid>
+**
+$ oci iam compartment list -c <tenancy-ocid>**
 
 Where <tenancy-ocid> is your tenancy’s OCID. If you don’t get some authorization error but your compartments’ data, you’re good to go.
 
@@ -46,7 +46,7 @@ $ export TF_VAR_ssh_public_key=<your public key>
   
 **Network Resources For The Free Kubernetes Cluster**
  
-  The first thing we need to tell Terraform is which provider to use. There’s one provider for Oracle Cloud called oci.
+The first thing we need to tell Terraform is which provider to use. There’s one provider for Oracle Cloud called oci.
 
 Into the infra.tf file:
 
@@ -57,6 +57,7 @@ This will configure the oci provider for the specified region which is coming fr
 Then, let’s create the Virtual Cloud Network (VCN) and corresponding configurations in the infra.tf file
  
 **Getting Access To The Kubernetes Cluster**
+
   Lets create one more file outputs.tf file.
   
   Noe all the configurations are in place, Lets trigger the terraform to create the cluster.
