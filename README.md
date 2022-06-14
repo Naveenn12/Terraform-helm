@@ -84,5 +84,15 @@ And then let’s try to list the available nodes in the cluster.
 **$ kubectl get nodes**
   
 And if you see the 2 nodes that the node pool has provisioned, you’re done. The cluster is ready.
-  
-  
+
+**Building A Custom Application**
+ 
+ Create a custom Node JS application to insert the data to mongo DB, will put all the contents in **nodedocker_app**
+ 
+ Lets buiuld an image using docker compose
+ docker-compose up
+ It will create 2 containsers respectively Node JS and Mongo DB, we can access the application with localhost
+ http://localhost:3000
+ 
+ 
+ 
