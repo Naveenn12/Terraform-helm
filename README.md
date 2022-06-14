@@ -65,8 +65,8 @@ Then, let’s create the Virtual Cloud Network (VCN) and corresponding configura
   
   Now all the configurations are in place, Lets trigger the terraform to create the cluster. Make sure you are oci-infra folder
   
-1) Execute a terraform init
-2) Execute a terraform apply
+1) Execute a **terraform init**
+2) Execute a **terraform apply**
 
  If you did everything right, after waiting for some time, your cluster should be ready. Note that the cluster nodes are relatively slow to provision because the Oracle Container Engine for Kubernetes is updating them with the proper packages and that takes some time. For me it took around 20 minutes to provision everything. You can monitor the state of the cluster nodes on the Oracle Cloud web console.
  
