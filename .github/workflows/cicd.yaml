@@ -48,6 +48,7 @@ jobs:
         run: |
           curl -O https://raw.githubusercontent.com/helm/helm/master/scripts/get-helm-3
           chmod +x get-helm-3
+          bash ./get-helm-3
           helm version
       - name: 'Currently running services'
         run: kubectl -n free-ns get pods
