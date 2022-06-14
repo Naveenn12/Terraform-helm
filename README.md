@@ -9,6 +9,8 @@ To start creating the free Kubernetes cluster on Oracle Cloud using Terraform yo
 6) Terraform CLI installed
 7) kubectl installed
 
+Once these are in Place, clone this project to user home directory.
+
 **CLI Access Configuration**
 
 First of all, when you have OCI CLI installed on your machine, execute the following command, otherwise you need to setup the OCI CLI
@@ -98,4 +100,69 @@ And if you see the 2 nodes that the node pool has provisioned, you’re done. Th
  
 ** Free Private Docker Registry**
  
+ The next thing we wanna do is to create a free private Docker registry. You can for sure put everything into public registries but if you need to, you can also do it privately on Oracle Cloud.
+
+Let’s create the registry using Terraform. Open the oci-infra/infra.tf file from the previous article and add the following:
+
+// ...previous things are omitted for simplicity
+resource "oci_artifacts_container_repository" "docker_repository" {
+  compartment_id = var.compartment_id
+  display_name   = "free-kubernetes-nginx"
+  is_immutable = false
+  is_public    = false
+}
+Then a quick terraform apply and your registry is ready to go.
+
+Let’s grab the username and password for the private registry.
  
+** Note:** I Have already updated the infra.tf file, so docker registry will be created as part of cluster set up.
+ 
+ The URL for the private registry can be found here: Availability by Region. The URL solely depends on which region you put the docker registry in. In my case, it’s eu-frankfurt-1 so my URL is gonna be fra.ocir.io.
+ 
+
+The next thing is the username. It’s gonna consist of 2 things. The tenancy’s Object Storage Namespace and the user that has the permissions to access the Docker registry in the account.
+ 
+The tenancy’s Object Storage Namespace can be found on the Tenancy’s page:
+ 
+ And at the bottom, you can find the Object Storage Namespace, it’s gonna be some random string.
+
+Next, we should get the name of the user we’re planning to use for interacting with the docker registry. Go to Identity/Users and choose from the available users or create a new one if you wish but don’t forget to add the neessary permissions to access the registry.
+
+The username for the registry comes together from those 2 in the form of <object-storage-namespace>/<username> so for example it could be abcdefgh/test123.
+
+The last thing we need to do is to generate a password for programmatic authentication, so let’s go to the user’s details on the cloud console and select Auth Tokens from the left.
+
+Click on Generate token and at the end you’ll get a password, save that.
+
+To test the whole thing, open a terminal window and type the following:
+
+$ docker login -u <object-storage-namespace>/<username> <docker server>
+This will prompt you for the password you generated on the Auth Tokens page. If everything is set up correctly, you should see the Login succeeded message.
+
+Note: it might take a minute for the auth token to become active so give it some time if you see Unauthorized messages from docker login
+ 
+ Alright, now we need to make the docker access available to the Kubernetes cluster so it can download images from this private registry.
+
+Open up your terminal window and do the following:
+
+$ kubectl -n <namespace> create secret docker-registry free-registry-secret --docker-server=<docker-server> --docker-username='<object-storage-namespace>/<username>' --docker-password='<password>'
+secret/free-registry-secret created
+This will create a secret named free-registry-secret which will be the docker access for that particular namespace to our registry.
+ 
+**Automatic Building And Deployment**
+ 
+ Alright, the next thing we should do is to create the GitHub Action to deploy the app to the cluster upon pushing to the Git repository.
+
+Create the file .github/workflows/cicd.yaml with the following content:
+ 
+ This is the workflow definition which will trigger every time anything gets changed in the app folder and on the master branch.
+ 
+ **Let me sum up the steps:**
+1. Git Checkout
+2. Docker Buildx setup
+3. Installing OCI CLI
+4. Installing kubectl
+5. Verifying if kubectl is configured by listing all pods
+6. Authenticate to Docker registry
+7. Logging all the available platforms we can build Docker images for Building and uploading the image
+8. Install the Helm for application deployment
