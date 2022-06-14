@@ -92,9 +92,9 @@ And if you see the 2 nodes that the node pool has provisioned, you’re done. Th
 
 **Building A Custom Application**
  
- Create a custom Node JS application to insert the data to mongo DB, will put all the contents in **nodedocker_app**
+ Create a custom Node JS application along with a mongodb database, once the app is running, it will display a web page "Hello world, insert the data into databse", souce code is placed in the  **nodedocker_app**
  
- Lets buiuld an image using docker compose
+ Lets build an image using docker compose to test the applicaiton local machine.
  docker-compose up
  It will create 2 containsers respectively Node JS and Mongo DB, we can access the application with localhost
  http://localhost:3000
