@@ -157,7 +157,7 @@ This will create a secret named free-registry-secret which will be the docker ac
  
  Alright, the next thing we should do is to create the GitHub Action to deploy the app to the cluster upon pushing to the Git repository.
 
-Create the file .github/workflows/cicd.yaml with the following content:
+Create the file **.github/workflows/cicd.yaml** with the following content:
  
  This is the workflow definition which will trigger every time anything gets changed in the nodedocker_app folder and on the master branch.
  
