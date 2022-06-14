@@ -68,5 +68,6 @@ jobs:
           helm nodeapp ./node-app-helm/.
       - name: Get the service URL
         run: |
-          kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services nodeapp
-          kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services easy-notes-service
+          export NODE_PORT=$(kubectl get --namespace default -o jsonpath="{.spec.ports[0].nodePort}" services nodeapp)
+          export NODE_IP=$(kubectl get nodes --namespace default -o jsonpath="{.items[0].status.addresses[0].address}")
+          echo http://$NODE_IP:$NODE_PORT
