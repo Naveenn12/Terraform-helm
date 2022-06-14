@@ -157,3 +157,10 @@ resource "oci_containerengine_node_pool" "k8s_node_pool" {
 
   ssh_public_key = var.ssh_public_key
 }
+// ...previous things are omitted for simplicity
+resource "oci_artifacts_container_repository" "docker_repository" {
+  compartment_id = var.compartment_id
+  display_name   = "free-kubernetes-nodeapp"
+  is_immutable = false
+  is_public    = false
+}
