@@ -22,6 +22,7 @@ This will prompt you all the data it’ll need to generate the proper configurat
 2) Tenancy ID
 3) Region 
 4) Private key lcoation
+
 Note: for some reason I wasn’t able to get Terraform work with a passphrase protected private key because there’s some random issue there so I decided to go without a password.
 
 After you’re done with the key generation, there’s one more thing we need to do. Associating the public key that was generated during setup with the user. Go back to your user in the Oracle Cloud web console, click on API keys on the left and click on Add API Key. Upload your public key’s pem file and you’re done.
