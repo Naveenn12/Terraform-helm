@@ -155,7 +155,7 @@ This will create a secret named free-registry-secret which will be the docker ac
 
 Create the file .github/workflows/cicd.yaml with the following content:
  
- This is the workflow definition which will trigger every time anything gets changed in the app folder and on the master branch.
+ This is the workflow definition which will trigger every time anything gets changed in the nodedocker_app folder and on the master branch.
  
  **Let me sum up the steps:**
 1. Git Checkout
