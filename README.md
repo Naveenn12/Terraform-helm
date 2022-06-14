@@ -101,7 +101,8 @@ And if you see the 2 nodes that the node pool has provisioned, you’re done. Th
  
  Awesome. The Docker image can be built now.
  
-** Free Private Docker Registry**
+ 
+**Free Private Docker Registry**
  
  The next thing we wanna do is to create a free private Docker registry. You can for sure put everything into public registries but if you need to, you can also do it privately on Oracle Cloud.
 
