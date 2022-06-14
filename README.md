@@ -63,7 +63,7 @@ Then, let’s create the Virtual Cloud Network (VCN) and corresponding configura
 
   Lets create one more file outputs.tf file.
   
-  Now all the configurations are in place, Lets trigger the terraform to create the cluster. Make sure you are oci-infra folder
+  Now all the configurations are in place, Lets trigger the terraform to create the cluster. Make sure you are in **oci-infra** folder
   
 1) Execute a **terraform init**
 2) Execute a **terraform apply**
