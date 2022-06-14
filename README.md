@@ -1,13 +1,13 @@
 **Prerequisites**
-To start creating the free Kubernetes cluster on Oracle Cloud using Terraform you’ll need the following things:
+To start creating the free Kubernetes cluster on Oracle Cloud using Terraform you’ll need the following things in Sand Box.
 
-An Oracle Cloud account
-A compartment you want the resources to provision in – it can be the root compartment if that’s okay with you
-A user that have permissions to access the necessary resources – can be your root user if you want to
-Optionally an SSH key you want to use to provision your Kubernetes worker nodes and wanna make sure you have some way to access them if needed
-OCI CLI installed
-Terraform CLI installed
-kubectl installed
+1) An Oracle Cloud account
+2) A compartment you want the resources to provision in – it can be the root compartment if that’s okay with you
+3) A user that have permissions to access the necessary resources – can be your root user if you want to
+4) Optionally an SSH key you want to use to provision your Kubernetes worker nodes and wanna make sure you have some way to access them if needed
+5) OCI CLI installed
+6) Terraform CLI installed
+7) kubectl installed
 
 **CLI Access Configuration**
 
