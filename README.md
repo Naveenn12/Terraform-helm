@@ -94,5 +94,8 @@ And if you see the 2 nodes that the node pool has provisioned, you’re done. Th
  It will create 2 containsers respectively Node JS and Mongo DB, we can access the application with localhost
  http://localhost:3000
  
+ Awesome. The Docker image can be built now.
+ 
+** Free Private Docker Registry**
  
  
